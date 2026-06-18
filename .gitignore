@@ -7,3 +7,10 @@
 __pycache__/
 *.pyc
 .DS_Store
+
+# Node
+node_modules/
+
+# Keep npm manifest files (override *.json above)
+!package.json
+!package-lock.json
