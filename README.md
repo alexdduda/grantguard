@@ -10,7 +10,7 @@ Government procurement loses an estimated 20-25% of spending to corruption annua
 
 The system is stress-tested against 15 attack vectors, 7 based on empirically documented patterns from EU Structural Funds, FPDS-NG, and PSPC audit data, and 8 forward-looking scenarios including LLM-assisted proposal gaming, state-actor reviewer infiltration, and AI-induced score homogeneity.
 
-It is resistant to 12 of 15 attack vectors. The three that remain (specification gaming, short-horizon bid rotation, democratic capture) require institutional rather than algorithmic interventions, and are documented as design constraints rather than open bugs.
+The original V3–V6 design reported resistance to 12 of 15 attack vectors. A later independent adversarial audit (V7–V10, see [AUDIT_FINDINGS.md](AUDIT_FINDINGS.md)) found several of those "resistant" claims were overstated — the original tests largely graded their own homework. Under adaptive adversaries the detection layer turned out to be decorative, Krum was dominated by a plain median, and the surviving defenses (COI-dispersion, confidential rubric, per-entity caps, value-aggregation) all degrade to one binding dependency: **the quality of the identity/relationship graph** (COI links, beneficial ownership, entity resolution). That is an institutional/data asset, not an algorithm. Read the audit before relying on any single headline number here.
 
 ---
 
@@ -22,13 +22,18 @@ grantguard/
 │   ├── grantguard_simulation.py # V3 base: core data structures and pipeline
 │   ├── grantguard_v4.py         # V4: two-layer rubric, LR rotation test, Krum
 │   ├── grantguard_v5.py         # V5: future scenarios, US/Canada modules
-│   └── grantguard_v6.py         # V6: feedback loop, ML classifier, whistleblower, PQC
+│   ├── grantguard_v6.py         # V6: feedback loop, ML classifier, whistleblower, PQC
+│   ├── grantguard_v7.py         # V7 AUDIT: decoupling, adaptive adversary, centroid-Krum
+│   ├── grantguard_v8.py         # V8 HARDEN: median>krum, k=7, dispersion, confidential
+│   ├── grantguard_v9.py         # V9 ATTACK: COI-coverage collapse, rubric leakage
+│   └── grantguard_v10.py        # V10 AXES: temporal/CUSUM, volume/cap, splitting/aggregation
 ├── docs/
 │   └── grantguard_docs.js       # Generates Word documents
 ├── articles/
 │   ├── llm_gaming.md            # Article: how LLMs break procurement scoring
 │   ├── whistleblower_gap.md     # Article: US FCA vs Canada PSDPA
 │   └── grantguard_article.md    # Article: AI lab overview
+├── AUDIT_FINDINGS.md            # Independent adversarial audit (V7–V10) and verdict
 ├── requirements.txt
 └── README.md
 ```
@@ -155,11 +160,15 @@ node docs/grantguard_docs.js
 
 ## Residual Vulnerabilities
 
-**Specification gaming (CPR 0.44).** LLM-assisted or human gaming of public scoring rubrics is legal and undetectable by score analysis alone. The two-layer rubric mitigates but does not resist it. The remaining fix requires qualitative human review by evaluators not involved in rubric design.
+The adversarial audit (V7–V10) materially revised this list. See [AUDIT_FINDINGS.md](AUDIT_FINDINGS.md) for the full numbers.
 
-**Democratic capture.** Reviewers systematically favoring politically connected applicants is detectable only in retrospect through post-award performance analysis. Requires independent oversight with political insulation.
+**Entity/relationship-data dependency (the binding constraint).** Across six independent attack vectors, every surviving defense — COI-dispersion assignment, per-entity submission caps, related-award value aggregation — degrades in proportion to how incomplete the identity/relationship graph is. With realistic COI coverage (~0.25–0.5), a co-assigned ring of 4–5 funds a mediocre proposal 30–90% of the time. This is a data/institutional limit, not an algorithmic one.
 
-**Fully captured institutional environment.** If the ministry or oversight function is itself controlled by corrupt actors, no within-system mechanism survives.
+**Specification / LLM gaming.** The two-layer confidential rubric mitigates but does not resist gaming, and an *adaptive* gamer evades the uniformity detector (recall collapses ~86%→35%). The confidential rubric also decays toward useless as its dimension pool leaks across rounds, so it requires continuous rotation.
+
+**Coordinated collusion under thin oversight.** A reviewer ring that meets/exceeds the Byzantine tolerance `f` defeats robust aggregation outright; a majority ring defeats every aggregator tested. Detection (CIM/CRS) was found to be effectively decorative — decoupling it changed corruption penetration by <0.3% — and Krum specifically was dominated by a plain median on both robustness and clean-data quality.
+
+**Democratic / institutional capture.** Reviewers favoring politically connected applicants is detectable only in retrospect; full institutional capture survives no within-system mechanism. Unchanged from the original assessment.
 
 ---
 
