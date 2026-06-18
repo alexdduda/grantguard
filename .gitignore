@@ -1,0 +1,9 @@
+# Generated outputs
+*.png
+*.csv
+*.json
+*.docx
+*.txt
+__pycache__/
+*.pyc
+.DS_Store
