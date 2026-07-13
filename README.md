@@ -26,7 +26,10 @@ grantguard/
 │   ├── grantguard_v7.py         # V7 AUDIT: decoupling, adaptive adversary, centroid-Krum
 │   ├── grantguard_v8.py         # V8 HARDEN: median>krum, k=7, dispersion, confidential
 │   ├── grantguard_v9.py         # V9 ATTACK: COI-coverage collapse, rubric leakage
-│   └── grantguard_v10.py        # V10 AXES: temporal/CUSUM, volume/cap, splitting/aggregation
+│   ├── grantguard_v10.py        # V10 AXES: temporal/CUSUM, volume/cap, splitting/aggregation
+│   └── coi_graph.py             # REAL COI-graph interface: load from CSV, COI-aware assignment
+├── data/
+│   └── example_coi_graph/       # Concrete example graph (nodes.csv, edges.csv) + README
 ├── docs/
 │   └── grantguard_docs.js       # Generates Word documents
 ├── articles/

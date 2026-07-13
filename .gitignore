@@ -17,3 +17,6 @@ node_modules/
 # Keep npm manifest files (override *.json above)
 !package.json
 !package-lock.json
+
+# Keep committed example data (override *.csv above)
+!data/**/*.csv

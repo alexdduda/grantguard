@@ -1,0 +1,11 @@
+src,dst,relation,provenance,disclosed,note
+R1,A5,coauthor,orcid,true,Chen & Zhou co-authored 3 papers 2021-2023
+R3,A2,phd_advisor,university_records,true,Rossi supervised Berg's PhD at ETH
+R2,O2,former_employee,linkedin,true,Okonkwo was Head of ML at Helio Robotics 2017-2019
+A1,O2,leads,corporate_registry,true,Vance is founder/CEO of Helio Robotics
+R4,P1,coauthor,orcid,true,Haddad & Okwuosa co-authored 2022
+P1,A3,coauthor,orcid,true,Okwuosa & Malik co-authored 2020
+R1,R3,coauthor,orcid,true,Chen & Rossi co-authored (reviewer-reviewer tie)
+A5,O1,funded_by,corporate_registry,true,Quanta Ventures is a Series-B investor in Pallas AI
+R5,A6,board_member,corporate_registry,false,Nowak sits on Grove Energy's advisory board - NOT declared on the disclosure form
+R6,A1,sibling,undisclosed,false,Silva and Vance are siblings - appears in no dataset

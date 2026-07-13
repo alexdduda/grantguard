@@ -1,0 +1,17 @@
+node_id,label,type,org
+R1,Dr. Lena Chen,reviewer,MIT
+R2,Dr. Ada Okonkwo,reviewer,Stanford
+R3,Dr. Marco Rossi,reviewer,ETH Zurich
+R4,Dr. Yara Haddad,reviewer,University of Toronto
+R5,Dr. Piotr Nowak,reviewer,TU Delft
+R6,Dr. Sofia Silva,reviewer,Imperial College
+R7,Dr. Jae Kim,reviewer,KAIST
+A1,Dr. Marco Vance,applicant,Helio Robotics
+A2,Dr. Ingrid Berg,applicant,Nordic Materials Lab
+A3,Dr. Rahim Malik,applicant,Via Diagnostics
+A4,Dr. Tunde Adeyemi,applicant,Karst Civil Engineering
+A5,Dr. Wei Zhou,applicant,Pallas AI
+A6,Dr. Erik Larsson,applicant,Grove Energy
+P1,Dr. Bem Okwuosa,person,
+O1,Quanta Ventures,org,
+O2,Helio Robotics,org,

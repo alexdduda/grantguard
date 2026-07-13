@@ -70,6 +70,18 @@ in *none* of those databases — an off-record friendship, a cousin, a quiet sid
 deal — are the **hidden ties** the algorithm cannot route around. It can only avoid
 a conflict it can *see*.
 
+**See this for yourself:** a concrete example graph lives in
+[`data/example_coi_graph/`](data/example_coi_graph/) and a real loader/interface in
+[`simulation/coi_graph.py`](simulation/coi_graph.py). Run `python
+simulation/coi_graph.py` and it shows the same graph under two data-coverage
+regimes: self-disclosure alone catches 6 of 8 real conflicts; adding external
+registries catches 7 of 8; and an undisclosed sibling tie between a reviewer and
+an applicant is caught by *neither* — so the assignment step happily seats that
+reviewer on their own sibling's panel and never flags it. That one invisible edge
+is this whole document's argument in miniature. `coi_graph.assign_with_coi()` is
+the interface a real deployment implements in place of the synthetic
+`generate_network()`.
+
 ---
 
 ## What commit-reveal does and does not stop
