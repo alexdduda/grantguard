@@ -27,6 +27,7 @@ grantguard/
 │   ├── grantguard_v8.py         # V8 HARDEN: median>krum, k=7, dispersion, confidential
 │   ├── grantguard_v9.py         # V9 ATTACK: COI-coverage collapse, rubric leakage
 │   ├── grantguard_v10.py        # V10 AXES: temporal/CUSUM, volume/cap, splitting/aggregation
+│   ├── grantguard_v11.py        # V11: COI-coverage collapse reproduced on the REAL example graph
 │   └── coi_graph.py             # REAL COI-graph interface: load from CSV, COI-aware assignment
 ├── data/
 │   └── example_coi_graph/       # Concrete example graph (nodes.csv, edges.csv) + README
