@@ -1,16 +1,18 @@
-# GrantGuard — Independent Adversarial Audit (V7–V10)
+# GrantGuard — Independent Adversarial Audit (V7–V11)
 
-*An attempt to break GrantGuard's own results, harden it, and break the hardening.*
+*An attempt to break GrantGuard's own results, harden it, break the hardening, and
+confirm the conclusion holds on a real, named relationship graph.*
 
 The original V3–V6 work reported resistance to 12 of 15 attack vectors. But those
 tests were written by the same hand as the defenses, scored against labels the
 generator itself planted, with attack parameters chosen by the author — i.e. the
-algorithm largely **graded its own homework**. V7–V10 apply independent pressure:
-adaptive adversaries, confound-free harnesses, and attacks aimed squarely at the
-defenses' load-bearing assumptions.
+algorithm largely **graded its own homework**. V7–V11 apply independent pressure:
+adaptive adversaries, confound-free harnesses, attacks aimed squarely at the
+defenses' load-bearing assumptions, and finally a rerun on a concrete named graph
+instead of a synthetic random one.
 
-All audits are reproducible from `simulation/grantguard_v7.py … v10.py`.
-Numbers below are Monte-Carlo means (40–300 iterations/cell depending on the test).
+All audits are reproducible from `simulation/grantguard_v7.py … v11.py`.
+Numbers below are Monte-Carlo means (40–400 iterations/cell depending on the test).
 
 ---
 
@@ -18,8 +20,9 @@ Numbers below are Monte-Carlo means (40–300 iterations/cell depending on the t
 
 > **GrantGuard's ceiling is not its math. It is the quality of the identity /
 > relationship graph it runs on** — conflict-of-interest links, beneficial
-> ownership, entity resolution. Six independent attack vectors all reduce to this
-> single dependency. The only purely-algorithmic win in the entire audit was a
+> ownership, entity resolution. Seven independent attack vectors all reduce to
+> this single dependency, and V11 confirms it on a real named graph, not just a
+> parameter sweep. The only purely-algorithmic win in the entire audit was a
 > CUSUM trend test against slow score-creep, and even that is partial.
 
 Secondary headline: the entire **detection layer (CIM / CRS / flags) is
@@ -116,6 +119,40 @@ below the funding cutoff), which per-proposal-robust median cannot prevent.
 Two of three defenses (cap, aggregation) collapse to the **same entity-resolution
 dependency** as v9's dispersion. CUSUM is the only one that doesn't — and it's
 partial.
+
+---
+
+## V11 — The A9 collapse reproduced on a real, named graph
+
+Every result above ran on `grantguard_simulation.py`'s synthetic random network.
+`grantguard_v11.py` reproduces the A9 (COI-coverage collapse) result on
+[`data/example_coi_graph/`](data/example_coi_graph) — 7 named reviewers, 6 named
+applicants, 10 relationship edges with real provenance (ORCID, university
+records, corporate registry, or `undisclosed`) — using the actual
+[`coi_graph.py`](simulation/coi_graph.py) assignment interface instead of a
+synthetic stand-in.
+
+Setup: a ring of 3 reviewers (R2, R5, R7) targets a borderline applicant (A3,
+just below the funding cutoff) with the centroid attack, k=3, median aggregation.
+The ring's *own* collusion ties are visible to the assigner only in proportion to
+`coverage` — how complete the COI data is.
+
+| coverage | ring seats on A3's panel (of k=3) | target funded (attack) | pure effect |
+|---|---|---|---|
+| 1.00 | 1.00 | 37.8% | 22.0% |
+| 0.50 | 1.39 | 57.8% | 41.5% |
+| 0.00 | 1.60 | 71.8% | **53.8%** |
+
+Same curve as A9's synthetic result, now driven by the completeness of an actual
+named relationship graph rather than a parameter sweep: as coverage drops, the
+ring co-locates on the panel and drags the median.
+
+**Bonus finding this run exposed that the synthetic A9 test didn't isolate:**
+pure effect stays a nontrivial **22% even at coverage 1.0**. With k=3, a *lone*
+co-assigned ring member already shifts median-of-3 (it drops the low tail of a
+3-element set) — this is a k=3 artifact, not a coverage failure, and it is a
+concrete data point *for* the k=7 recommendation below, which needs a ≥3-member
+majority to move.
 
 ---
 

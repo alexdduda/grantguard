@@ -10,7 +10,7 @@ Government procurement loses an estimated 20-25% of spending to corruption annua
 
 The system is stress-tested against 15 attack vectors, 7 based on empirically documented patterns from EU Structural Funds, FPDS-NG, and PSPC audit data, and 8 forward-looking scenarios including LLM-assisted proposal gaming, state-actor reviewer infiltration, and AI-induced score homogeneity.
 
-The original V3–V6 design reported resistance to 12 of 15 attack vectors. A later independent adversarial audit (V7–V10, see [AUDIT_FINDINGS.md](AUDIT_FINDINGS.md)) found several of those "resistant" claims were overstated — the original tests largely graded their own homework. Under adaptive adversaries the detection layer turned out to be decorative, Krum was dominated by a plain median, and the surviving defenses (COI-dispersion, confidential rubric, per-entity caps, value-aggregation) all degrade to one binding dependency: **the quality of the identity/relationship graph** (COI links, beneficial ownership, entity resolution). That is an institutional/data asset, not an algorithm. Read the audit before relying on any single headline number here.
+The original V3–V6 design reported resistance to 12 of 15 attack vectors. A later independent adversarial audit (V7–V11, see [AUDIT_FINDINGS.md](AUDIT_FINDINGS.md)) found several of those "resistant" claims were overstated — the original tests largely graded their own homework. Under adaptive adversaries the detection layer turned out to be decorative, Krum was dominated by a plain median, and the surviving defenses (COI-dispersion, confidential rubric, per-entity caps, value-aggregation) all degrade to one binding dependency: **the quality of the identity/relationship graph** (COI links, beneficial ownership, entity resolution). That is an institutional/data asset, not an algorithm. Read the audit before relying on any single headline number here.
 
 ---
 
@@ -38,7 +38,7 @@ grantguard/
 │   ├── whistleblower_gap.md     # Article: US FCA vs Canada PSDPA
 │   └── grantguard_article.md    # Article: AI lab overview
 ├── HOW_IT_WORKS.md              # Plain-language mechanics: the two graphs, commit-reveal, the economics
-├── AUDIT_FINDINGS.md            # Independent adversarial audit (V7–V10) and verdict
+├── AUDIT_FINDINGS.md            # Independent adversarial audit (V7–V11, incl. real graph) and verdict
 ├── requirements.txt
 └── README.md
 ```
@@ -170,7 +170,7 @@ node docs/grantguard_docs.js
 
 ## Residual Vulnerabilities
 
-The adversarial audit (V7–V10) materially revised this list. See [AUDIT_FINDINGS.md](AUDIT_FINDINGS.md) for the full numbers.
+The adversarial audit (V7–V11) materially revised this list. See [AUDIT_FINDINGS.md](AUDIT_FINDINGS.md) for the full numbers.
 
 **Entity/relationship-data dependency (the binding constraint).** Across six independent attack vectors, every surviving defense — COI-dispersion assignment, per-entity submission caps, related-award value aggregation — degrades in proportion to how incomplete the identity/relationship graph is. With realistic COI coverage (~0.25–0.5), a co-assigned ring of 4–5 funds a mediocre proposal 30–90% of the time. This is a data/institutional limit, not an algorithmic one.
 
