@@ -33,10 +33,16 @@ grantguard/
 │   ├── llm_gaming.md            # Article: how LLMs break procurement scoring
 │   ├── whistleblower_gap.md     # Article: US FCA vs Canada PSDPA
 │   └── grantguard_article.md    # Article: AI lab overview
+├── HOW_IT_WORKS.md              # Plain-language mechanics: the two graphs, commit-reveal, the economics
 ├── AUDIT_FINDINGS.md            # Independent adversarial audit (V7–V10) and verdict
 ├── requirements.txt
 └── README.md
 ```
+
+New here? Read [HOW_IT_WORKS.md](HOW_IT_WORKS.md) first — it explains the two
+separate graphs (COI vs commit-reveal), who can see what, how the relationship
+graph is actually sourced, and why the "economically irrational" claim is an
+inequality (and where it breaks).
 
 ---
 
