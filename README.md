@@ -142,7 +142,7 @@ Canada moderate scenario over 10 years:
 ## Installation
 
 ```bash
-git clone https://github.com/yourusername/grantguard.git
+git clone https://github.com/alexdduda/grantguard.git
 cd grantguard
 pip install -r requirements.txt
 ```
