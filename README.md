@@ -197,4 +197,4 @@ The adversarial audit (V7–V11) materially revised this list. See [AUDIT_FINDIN
 
 ## License
 
-AGPL-3.0 — if you modify this software and run it as a network service, you must make your modified source available to users of that service. See [LICENSE](LICENSE) for the full text.
+MIT
